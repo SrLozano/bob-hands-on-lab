@@ -73,6 +73,7 @@ img{max-width:100%}
 .cbody{flex:1;min-width:0}
 .ctitle{font-weight:700;font-size:16.5px;color:#f1f5fb;line-height:1.25}
 .csub{color:var(--muted);font-size:13px;margin-top:3px;overflow:hidden;text-overflow:ellipsis}
+.ckick{color:var(--blue2);font-weight:800;letter-spacing:2px;font-size:11px;text-transform:uppercase;margin-bottom:3px}
 .chev{flex:none;color:#4a597a;font-size:24px;font-weight:700;padding-right:4px}
 /* progress ring */
 .ring{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
@@ -371,7 +372,7 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
   function card(o){
     return '<a class="card" href="#'+o.href+'">'
       +(o.icon?'<img class="chip-img" src="images/'+o.icon+'.png" alt="">':'<div class="chip '+(o.chipcls||'g-blue')+'">'+o.chip+'</div>')
-      +'<div class="cbody"><div class="ctitle">'+o.title+'</div><div class="csub">'+(o.sub||'')+'</div></div>'
+      +'<div class="cbody">'+(o.kick?'<div class="ckick">'+o.kick+'</div>':'')+'<div class="ctitle">'+o.title+'</div><div class="csub">'+(o.sub||'')+'</div></div>'
       +(o.ring?ringEl(o.ring):chevEl())+'</a>';
   }
   function imgGallery(id){var a=(typeof IMAGES!=='undefined'&&IMAGES[id])||[];if(!a.length)return '';
@@ -468,7 +469,7 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
       card({href:'inputs',icon:'numpuntossuspensivos',chip:'⌘',chipcls:'g-slate',title:'Cómo interactuar con Bob',sub:'Atajos y formas de interactuar'})
     ].join('');
     var mods=MODULES.map(function(m){
-      return card({href:m.key,icon:'num'+m.n,chip:m.n,chipcls:'g-blue',title:m.name,sub:m.tag+' · '+m.labs.length+' lab'+(m.labs.length>1?'s':''),ring:'ring-'+m.key});
+      return card({href:m.key,icon:'num'+m.n,chip:m.n,chipcls:'g-blue',kick:'Módulo '+m.n,title:m.name,sub:m.tag+' · '+m.labs.length+' lab'+(m.labs.length>1?'s':''),ring:'ring-'+m.key});
     }).join('');
     var ref=card({href:'conceptos',icon:'numbombilla',chip:'i',chipcls:'g-slate',title:'Conceptos',sub:'Ideas clave para tener a mano'});
     document.getElementById('home').innerHTML=
