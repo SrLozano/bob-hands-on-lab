@@ -60,6 +60,7 @@ img{max-width:100%}
   border-radius:16px;padding:16px 16px;box-shadow:var(--shadow);cursor:pointer;
   transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}
 .card:hover{border-color:#4a5c86;background:var(--panel2)}
+.card.mod{box-shadow:var(--shadow),inset 4px 0 0 0 var(--blue)}
 .card,.navbtn{position:relative;overflow:hidden}
 .card>*,.navbtn>*{position:relative;z-index:1}
 .card::before,.navbtn::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(99,140,255,.22),transparent 62%);opacity:0;transition:opacity .3s ease;pointer-events:none;z-index:0}
@@ -370,7 +371,7 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
   function ringEl(id){return '<div class="ring" id="'+id+'" data-lbl="0/0"></div>';}
   function chevEl(){return '<div class="chev">›</div>';}
   function card(o){
-    return '<a class="card" href="#'+o.href+'">'
+    return '<a class="card'+(o.cls?' '+o.cls:'')+'" href="#'+o.href+'">'
       +(o.icon?'<img class="chip-img" src="images/'+o.icon+'.png" alt="">':'<div class="chip '+(o.chipcls||'g-blue')+'">'+o.chip+'</div>')
       +'<div class="cbody">'+(o.kick?'<div class="ckick">'+o.kick+'</div>':'')+'<div class="ctitle">'+o.title+'</div><div class="csub">'+(o.sub||'')+'</div></div>'
       +(o.ring?ringEl(o.ring):chevEl())+'</a>';
@@ -469,7 +470,7 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
       card({href:'inputs',icon:'numpuntossuspensivos',chip:'⌘',chipcls:'g-slate',title:'Cómo interactuar con Bob',sub:'Atajos y formas de interactuar'})
     ].join('');
     var mods=MODULES.map(function(m){
-      return card({href:m.key,icon:'num'+m.n,chip:m.n,chipcls:'g-blue',kick:'Módulo '+m.n,title:m.name,sub:m.tag+' · '+m.labs.length+' lab'+(m.labs.length>1?'s':''),ring:'ring-'+m.key});
+      return card({href:m.key,icon:'num'+m.n,chip:m.n,chipcls:'g-blue',cls:'mod',kick:'Módulo '+m.n,title:m.name,sub:m.tag+' · '+m.labs.length+' lab'+(m.labs.length>1?'s':''),ring:'ring-'+m.key});
     }).join('');
     var ref=card({href:'conceptos',icon:'numbombilla',chip:'i',chipcls:'g-slate',title:'Conceptos',sub:'Ideas clave para tener a mano'});
     document.getElementById('home').innerHTML=
