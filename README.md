@@ -7,7 +7,7 @@
 **Learn IBM Bob by doing: seven practical labs that take you from inline AI assistance to custom modes, Bob Shell and MCP.**
 
 [![Live guide](https://img.shields.io/badge/%F0%9F%9A%80%20Live%20guide-GitHub%20Pages-0f62fe?style=for-the-badge)](https://srlozano.github.io/bob-hands-on-lab/)
-[![Language: Spanish](https://img.shields.io/badge/content-Espa%C3%B1ol%20%F0%9F%87%AA%F0%9F%87%B8-c8102e?style=for-the-badge)](https://srlozano.github.io/bob-hands-on-lab/)
+[![Languages: Spanish, Catalan](https://img.shields.io/badge/content-Espa%C3%B1ol%20%C2%B7%20Catal%C3%A0-c8102e?style=for-the-badge)](https://srlozano.github.io/bob-hands-on-lab/)
 [![Labs](https://img.shields.io/badge/labs-7-24a148?style=for-the-badge)](#-the-labs)
 [![Unofficial](https://img.shields.io/badge/IBM-unofficial%20community%20material-525252?style=for-the-badge)](#-disclaimer)
 
@@ -17,7 +17,7 @@
 
 ---
 
-> 🇪🇸 **Language note:** the guide itself (all lab instructions, screenshots and explanations) is written in **Spanish**. This README is in English to make the repository easy to find and understand.
+> 🌍 **Language note:** the guide itself (all lab instructions and explanations) is available in **Spanish** (default) and **Catalan** (*català*), with an `ES | CA` switcher in the page. Screenshots show the Bob interface in Spanish. This README is in English to make the repository easy to find and understand.
 
 ## 📖 What is this?
 
@@ -58,6 +58,7 @@ The guide also includes a **setup** section (account, requirements, starting the
 - ✅ Progress saved automatically in your browser
 - 🧩 Copy-ready prompts and commands with a one-click "Copy" button
 - 🌙 Single static page (dark theme), no build step and no dependencies
+- 🌐 Spanish / Catalan switcher; your choice is remembered, and `?lang=ca` or `?lang=es` forces a language
 - ⚡ Screenshots load lazily, so the landing page opens fast
 
 ## 🚀 Getting started
@@ -78,7 +79,8 @@ To follow the labs you will also need IBM Bob and the [Galaxium Travels](https:/
 
 ```text
 .
-├── index.html      # The whole guide (HTML + CSS + JS in one file)
+├── index.html      # The guide (HTML + CSS + JS) with the Spanish content
+├── ca.js           # Catalan translation, loaded by index.html
 ├── images/         # Screenshots, Bob illustrations and author photos
 ├── .nojekyll       # Tells GitHub Pages to serve the files as they are
 └── README.md
