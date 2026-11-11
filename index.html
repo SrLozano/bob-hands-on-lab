@@ -221,6 +221,15 @@ dialog.acerca::backdrop{background:rgba(4,7,13,.66)}
 .autor-rol{font-size:12.5px;color:var(--muted);margin:2px 0 3px}
 .autor-email{font-size:12.5px}
 .acerca-pie{margin:16px 0 0;font-size:12px;color:var(--faint);line-height:1.5}
+
+/* ---------- LANGUAGE SWITCHER ---------- */
+.fb-right{display:flex;align-items:center;gap:14px}
+.langsw{display:inline-flex;border:1px solid var(--line2);border-radius:999px;background:var(--panel);overflow:hidden}
+.langsw button{background:none;border:none;color:var(--muted);font:inherit;font-size:12px;font-weight:700;letter-spacing:.5px;padding:5px 11px;cursor:pointer}
+.langsw button:hover{color:var(--ink)}
+.langsw button.on{background:var(--blue);color:#fff}
+.langsw button:focus-visible{outline:2px solid var(--blue2);outline-offset:-2px}
+.langsw.hero-lang{position:absolute;top:18px;right:22px;z-index:2}
 </style>
 </head>
 <body>
@@ -230,7 +239,7 @@ dialog.acerca::backdrop{background:rgba(4,7,13,.66)}
   <div class="acerca-cab">
     <div>
       <h2 id="acerca-titulo">IBM Bob · Level 3 — Guía de labs</h2>
-      <p>Autores · IBM España</p>
+      <p id="acerca-sub">Autores · IBM España</p>
     </div>
     <button class="acerca-cerrar" type="button" id="acerca-cerrar">Cerrar</button>
   </div>
@@ -259,9 +268,10 @@ dialog.acerca::backdrop{background:rgba(4,7,13,.66)}
         <div class="autor-email"><a href="mailto:miguel.hidalgo@ibm.com">miguel.hidalgo@ibm.com</a></div>
       </div>
     </div>
-    <p class="acerca-pie">Guía de labs del Level 3 de IBM Bob sobre la app de demo Galaxium Travels.</p>
+    <p class="acerca-pie" id="acerca-pie">Guía de labs del Level 3 de IBM Bob sobre la app de demo Galaxium Travels.</p>
   </div>
 </dialog>
+<script src="ca.js"></script>
 <script>
 const IMAGES = {"1.1":[{"s":"images/guia/lab21_1.png","c":"Explorer → booking_system_frontend › src › components › user › UserIdentification.tsx"},{"s":"images/guia/lab21_2.png","c":"El fichero abierto en el editor de Bob"},{"s":"images/guia/interact_inlinechat.png","c":"Pulsas ⌘K/Ctrl+K y aparece la cajita de instrucción en el editor"},{"s":"images/guia/interact_diff.png","c":"Bob genera el cambio y lo muestra como diff (verde = añade) para aceptar o rechazar"},{"s":"images/guia/lab21_4.png","c":"El código resultante: regex + validación del email"},{"s":"images/guia/lab21_5.png","c":"En Flights, al pulsar Book salta el modal Sign In"},{"s":"images/guia/lab21_6.png","c":"Con un email válido continúas a la reserva"},{"s":"images/guia/lab22_2.png","c":"En <code>getFlights</code>, le pides que envuelva la llamada con la lógica de reintentos; revisa el cambio antes de aceptar."}],"2.1":[{"s":"images/guia/lab23_1.png","c":"Fase Plan: Bob hace preguntas aclaratorias (precios, asientos, características, UX) antes de generar el plan."},{"s":"images/guia/lab23_2.png","c":"Fase Agent: ajusta el auto-approval y referencia los planes con @ (elige del desplegable los .md que creó Bob)."},{"s":"images/guia/lab23_3.png","c":"Resultado: en Flights, cada vuelo muestra las clases Economy / Business / Galaxium con su precio."},{"s":"images/guia/lab23_4.png","c":"Fase Plan — selecciona <b>Plan</b> en el selector de modos del sidebar (Bob solo lee, no escribe)."},{"s":"images/guia/lab23_5.png","c":"Bob genera los <b>documentos de plan</b> (p. ej. <code>seat-classes-plan.md</code>). <b>Léelos</b> antes de implementar — es lo que va a construir."},{"s":"images/guia/lab23_6.png","c":"Fase Agent — le dices «cambia a Agent e implementa»; Bob cambia de modo y crea una <b>lista de tareas</b> (Todo) con las subtareas."},{"s":"images/guia/lab23_7.png","c":"Inicia una <b>conversación nueva</b> (icono <b>+</b> del panel de Bob) para limpiar el contexto antes de implementar."},{"s":"images/guia/lab23_8.png","c":"Con <b>@</b> eliges los <code>.md</code> del plan que creó Bob (p. ej. IMPLEMENTATION_PLAN, SEAT_CLASSES…)."}],"3.1":[{"s":"images/guia/lab31_1.png","c":"Escribe / y elige /init en el menú: escanea el proyecto y genera el contexto."},{"s":"images/guia/lab31_2.png","c":"Bob genera los AGENTS.md (son ficheros protegidos: aprueba cada edición)."}],"4.1":[{"s":"images/guia/lab42_1.png","c":"Arranque: cd al proyecto y bob → aparece el banner de Bob Shell."},{"s":"images/guia/lab42_2.png","c":"Una tarea en la Shell, con @ para referenciar un fichero (Explica @api.ts)."},{"s":"images/guia/lab42_3.png","c":"Resumen de la tarea + menú de / (cambiar de modo con /mode agent, /ask…)."}],"3.3":[{"s":"images/guia/lab33_1.png","c":"El formulario Create new mode: slug, scope Project, Role definition (obligatorio), Custom Instructions y Tools (Read+Edit+MCP)."},{"s":"images/guia/lab33_2.png","c":"El modo en uso: responde con un plan de producto priorizado."},{"s":"images/guia/lab33_3.png","c":"Abre <b>Mode Settings</b> con el icono del <b>engranaje</b> del selector de modos."},{"s":"images/guia/lab33_4.png","c":"<b>Scope</b>: cambia de <code>Global</code> a tu proyecto <code>galaxium-travels</code> (así el modo solo aplica aquí)."},{"s":"images/guia/lab33_5.png","c":"<b>Tools</b>: marca las herramientas del modo (Read, Edit, MCP…). Es el control real: Bob no puede usar ninguna fuera de la lista."},{"s":"images/guia/lab33_6.png","c":"Pulsa <b>Save</b> para crear el modo."}],"3.2":[{"s":"images/guia/lab32_1.png","c":"Crea la carpeta <code>rules</code> dentro de <code>.bob</code> (clic derecho → New Folder → «rules»)."},{"s":"images/guia/lab32_2.png","c":"Dentro de <code>rules</code>, crea el fichero <code>basic_rules.md</code>."},{"s":"images/guia/lab32_3.png","c":"Las reglas: conciso, JSDoc en funciones públicas y registrar cada interacción en <code>internal-monologue/</code>. (La guía oficial se las pide a Bob en modo Agent; también puedes escribirlas tú.)"},{"s":"images/guia/lab32_4.png","c":"Aprueba cuando Bob pida escribir en <code>.bob/rules/</code> y ejecutar."},{"s":"images/guia/lab32_5.png","c":"Resultado: <code>basic_rules.md</code> con tus reglas permanentes, que Bob aplica en cada conversación."}],"4.2":[{"s":"images/guia/lab51_1.png","c":"Ajustes → pestaña <b>MCP</b>: busca «github» y pulsa <b>Install</b> en «GitHub». Es el catálogo/instalador de un clic (marketplace interno de IBM: se ve solo con VPN; sin ella, vía <code>mcp.json</code>)."},{"s":"images/guia/lab51_2.png","c":"El formulario <b>Install GitHub</b>: pega tu <b>PAT</b> y ⚠️ cambia el <b>Hostname</b> de <code>github.com</code> a <b>https://github.com</b>. Deja Toolsets (repos, issues, pull_requests, code_security) y Read Only en 0. Prerrequisitos: cuenta de GitHub (Docker solo para la vía local)."},{"s":"images/guia/lab51_3.png","c":"Genera el token en <b>Tokens (classic)</b> → <b>Generate new token (classic)</b>."},{"s":"images/guia/lab51_4.png","c":"El <code>.bob/mcp.json</code> con la vía <b>remota</b> (sin Docker); el token va tapado."},{"s":"images/guia/lab51_5.png","c":"En modo <b>Agent</b>, Bob invoca la tool <code>list_issues</code> del MCP (apruebas la llamada)."},{"s":"images/guia/lab51_6.png","c":"Bob lee el código, aplica el arreglo del issue y comprueba que compila."},{"s":"images/guia/lab51_7.png","c":"Commit y push hechos; Bob encadena el comentario del issue."},{"s":"images/guia/lab51_8.png","c":"Bob comenta el issue con el enlace al commit y lo cierra, todo vía MCP."},{"s":"images/guia/lab51_9.png","c":"En <code>github.com</code>, el issue queda <b>cerrado</b> con el comentario de Bob."}]};
 const LABS = [
@@ -386,9 +396,60 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
   var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
   var store=function(k,v){try{localStorage.setItem(k,v);}catch(e){}};
   var load=function(k){try{return localStorage.getItem(k);}catch(e){return null;}};
-  var dLabel={facil:'Fácil',medio:'Medio'};
-
-  var LABMAP={}; LABS.forEach(function(l){LABMAP[l.id]=l;});
+  // ---------- i18n (Spanish is the base language; Catalan lives in ca.js) ----------
+  var CA=window.CA||null;
+  var UI={
+    es:{title:'IBM Bob · Level 3 — Guía de labs',d_facil:'Fácil',d_medio:'Medio',star:'⭐ Imprescindible',what:'Qué es:',steps:'Pasos',
+      moreShots:'Más capturas',exact:'Prompt / comandos exactos',ok:'✅ Sabrás que va bien si:',fail:'Si algo falla',
+      home:'Inicio',back:'Volver',allMods:'Todos los módulos',module:'Módulo',ref:'Referencia',concepts:'Conceptos',
+      prev:'Anterior',next:'Siguiente',end:'Fin',backHome:'Volver al inicio',
+      startT:'Antes de empezar',startS:'Cuenta, requisitos y arrancar la app',inputsT:'Cómo interactuar con Bob',inputsS:'Atajos y formas de interactuar',
+      conceptsS:'Ideas clave para tener a mano',h1:'Guía práctica de labs',
+      lead:'Cuatro módulos, siete labs sobre la app <b>Galaxium Travels</b>. Elige por dónde empezar; tu progreso se guarda solo.',
+      grpStart:'Empieza aquí',grpMods:'Los módulos',grpRef:'Referencia',stepsU:'pasos',of:'de',copy:'Copiar',copied:'¡Copiado!',
+      authors:'Autores',by:'por',and:'y',authorsSub:'Autores · IBM España',
+      authorsFoot:'Guía de labs del Level 3 de IBM Bob sobre la app de demo Galaxium Travels.',close:'Cerrar',langLabel:'Idioma'},
+    ca:{title:'IBM Bob · Level 3 — Guia de labs',d_facil:'Fàcil',d_medio:'Mitjà',star:'⭐ Imprescindible',what:'Què és:',steps:'Passos',
+      moreShots:'Més captures',exact:'Prompt / comandes exactes',ok:'✅ Sabràs que va bé si:',fail:'Si alguna cosa falla',
+      home:'Inici',back:'Tornar',allMods:'Tots els mòduls',module:'Mòdul',ref:'Referència',concepts:'Conceptes',
+      prev:'Anterior',next:'Següent',end:'Final',backHome:"Tornar a l'inici",
+      startT:'Abans de començar',startS:"Compte, requisits i arrencar l'app",inputsT:'Com interactuar amb Bob',inputsS:"Dreceres i maneres d'interactuar",
+      conceptsS:'Idees clau per tenir a mà',h1:'Guia pràctica de labs',
+      lead:"Quatre mòduls, set labs sobre l'app <b>Galaxium Travels</b>. Tria per on començar; el teu progrés es desa sol.",
+      grpStart:'Comença aquí',grpMods:'Els mòduls',grpRef:'Referència',stepsU:'passos',of:'de',copy:'Copia',copied:'Copiat!',
+      authors:'Autors',by:'per',and:'i',authorsSub:'Autors · IBM Espanya',
+      authorsFoot:"Guia de labs del Level 3 d'IBM Bob sobre l'app de demo Galaxium Travels.",close:'Tanca',langLabel:'Llengua'}
+  };
+  var lang='es';
+  (function(){
+    var q=(location.search.match(/[?&]lang=(es|ca)\b/)||[])[1];
+    var nav=(navigator.language||'').slice(0,2);
+    lang=q||load('bobl3_lang')||(nav==='ca'?'ca':'es');
+    if(lang!=='ca'||!CA)lang='es';
+  })();
+  function T(k){var d=UI[lang]||UI.es;return (k in d)?d[k]:UI.es[k];}
+  function S(k){return (lang==='ca'&&CA&&CA.static&&CA.static[k])||STATIC[k];}
+  function modText(m){var c=lang==='ca'&&CA&&CA.modules&&CA.modules[m.key];return {tag:c?c.tag:m.tag,desc:c?c.desc:m.desc};}
+  // localized copy of a lab; steps, code and images are matched by position, so the Catalan arrays keep the same order
+  function LL(l){
+    var c=lang==='ca'&&CA&&CA.labs&&CA.labs[l.id];
+    if(!c)return l;
+    var o={};for(var k in l)o[k]=l[k];
+    ['title','obj','steps','code','succ','tip','trouble'].forEach(function(f){if(c[f]!==undefined)o[f]=c[f];});
+    if(l.tabs&&c.tabs)o.tabs={step:l.tabs.step,items:l.tabs.items.map(function(it,i){return {label:c.tabs[i].label,note:c.tabs[i].note,code:it.code};})};
+    return o;
+  }
+  var LABMAP={};
+  function refreshLabs(){LABS.forEach(function(l){LABMAP[l.id]=LL(l);});}
+  refreshLabs();
+  function langSwitch(cls){
+    if(!CA)return '';
+    return '<div class="langsw'+(cls?' '+cls:'')+'" role="group" aria-label="'+T('langLabel')+'">'
+      +['es','ca'].map(function(c){return '<button type="button" data-lang="'+c+'" aria-pressed="'+(c===lang)+'"'+(c===lang?' class="on"':'')+'>'+c.toUpperCase()+'</button>';}).join('')+'</div>';
+  }
+  function focusBar(back,progId){
+    return '<div class="focusbar"><a class="back" href="#'+back.href+'">'+back.label+'</a><div class="fb-right"><div class="fb-prog"'+(progId?' id="'+progId+'"':'')+'></div>'+langSwitch()+'</div></div>';
+  }
   // qué captura ilustra cada paso (fichero → nº de paso, 1-based)
   var STEPMAP={
     '1.1':{'lab21_1.png':1,'lab21_2.png':1,'interact_inlinechat.png':4,'interact_diff.png':6,'lab21_4.png':6,'lab21_5.png':7,'lab21_6.png':7,'lab22_2.png':9},
@@ -445,11 +506,13 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
     return '<h3 class="s">Capturas</h3><div class="gallery">'+a.map(function(o){return '<figure class="shot"><img loading="lazy" src="'+o.s+'" alt=""><figcaption>'+o.c+'</figcaption></figure>';}).join('')+'</div>';}
   function labContent(l){
     var imgs=(typeof IMAGES!=='undefined'&&IMAGES[l.id])||[];
+    var cai=lang==='ca'&&CA&&CA.images&&CA.images[l.id];
+    if(cai)imgs=imgs.map(function(o,i){return {s:o.s,c:cai[i]!==undefined?cai[i]:o.c};});
     var map=STEPMAP[l.id]||{};
     var cmap=(typeof CODEMAP!=='undefined'&&CODEMAP[l.id])||{};
     function fig(o){return '<figure class="shot"><img loading="lazy" src="'+o.s+'" alt=""><figcaption>'+o.c+'</figcaption></figure>';}
     function shotsFor(n){return imgs.filter(function(o){return map[o.s.split('/').pop()]===n;}).map(fig).join('');}
-    function codeBlock(c){return '<div class="code"><button class="cp">Copiar</button>'+esc(c)+'</div>';}
+    function codeBlock(c){return '<div class="code"><button class="cp">'+T('copy')+'</button>'+esc(c)+'</div>';}
     function codesFor(n){var out='';(l.code||[]).forEach(function(c,ci){if(cmap[ci]===n)out+=codeBlock(c);});return out;}
     var tabCodes={}; if(l.tabs&&l.tabs.items)l.tabs.items.forEach(function(it){tabCodes[it.code]=1;});
     function tabsFor(n){
@@ -465,18 +528,18 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
         +(tb?'<div class="steptabs">'+tb+'</div>':'')
         +(sh?'<div class="stepshots">'+sh+'</div>':'')+'</div></li>';}).join('');
     var extra=imgs.filter(function(o){return !map[o.s.split('/').pop()];});
-    var extraHtml=extra.length?'<h3 class="s">Más capturas</h3><div class="gallery">'+extra.map(fig).join('')+'</div>':'';
+    var extraHtml=extra.length?'<h3 class="s">'+T('moreShots')+'</h3><div class="gallery">'+extra.map(fig).join('')+'</div>':'';
     var leftover=(l.code||[]).filter(function(c,ci){return !(ci in cmap)&&!(ci in tabCodes);});
-    var codeHtml=leftover.length?'<h3 class="s">Prompt / comandos exactos</h3>'+leftover.map(codeBlock).join(''):'';
-    var badges=(l.star?'<span class="badge star">⭐ Imprescindible</span>':'')+'<span class="badge">'+l.t+'</span><span class="badge d-'+l.d+'">'+dLabel[l.d]+'</span>';
+    var codeHtml=leftover.length?'<h3 class="s">'+T('exact')+'</h3>'+leftover.map(codeBlock).join(''):'';
+    var badges=(l.star?'<span class="badge star">'+T('star')+'</span>':'')+'<span class="badge">'+l.t+'</span><span class="badge d-'+l.d+'">'+T('d_'+l.d)+'</span>';
     return '<div class="labtop"><span class="labnum'+(l.star?' star':'')+'">'+l.id+'</span>'
       +'<div><h2 class="labh">'+l.title+'</h2><div class="card-badges">'+badges+'</div></div></div>'
-      +'<p class="obj"><b>Qué es:</b> '+l.obj+'</p>'
-      +'<h3 class="s">Pasos</h3><ol class="steps">'+steps+'</ol>'
+      +'<p class="obj"><b>'+T('what')+'</b> '+l.obj+'</p>'
+      +'<h3 class="s">'+T('steps')+'</h3><ol class="steps">'+steps+'</ol>'
       +codeHtml
-      +'<div class="succ"><img class="okbob" src="images/bob_trophy.png" alt=""><b>✅ Sabrás que va bien si:</b> '+l.succ+'</div>'
+      +'<div class="succ"><img class="okbob" src="images/bob_trophy.png" alt=""><b>'+T('ok')+'</b> '+l.succ+'</div>'
       +(l.tip?'<div class="tip"><b>Tip:</b> '+l.tip+'</div>':'')
-      +(l.trouble?'<div class="trouble"><img class="warnbob" src="images/bob_warning.png" alt=""><h3 class="s">Si algo falla</h3>'+l.trouble+'</div>':'')
+      +(l.trouble?'<div class="trouble"><img class="warnbob" src="images/bob_warning.png" alt=""><h3 class="s">'+T('fail')+'</h3>'+l.trouble+'</div>':'')
       +extraHtml;
   }
   function navRow(prev,next){
@@ -488,65 +551,66 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
 
   // ---------- views ----------
   function staticView(key,content){
-    return '<div class="focusbar"><a class="back" href="#home">← Inicio</a><div class="fb-prog"></div></div>'
+    return focusBar({href:'home',label:'← '+T('home')})
       +'<div class="focusbody">'+secbob(key)+content+'</div>'
-      +navRow({href:'home',k:'Volver',t:'Inicio'},null);
+      +navRow({href:'home',k:T('back'),t:T('home')},null);
   }
   function modulePage(m){
     var i=MODULES.indexOf(m), nextm=MODULES[i+1];
+    var nextNav=nextm?{href:nextm.key,k:T('module')+' '+nextm.n,t:nextm.name}:{href:'conceptos',k:T('ref'),t:T('concepts')};
     if(m.labs.length===1){var sl=LABMAP[m.labs[0]];
-      return '<div class="focusbar"><a class="back" href="#home">← Inicio</a><div class="fb-prog" id="fbprog-lab-'+sl.id+'"></div></div>'
+      return focusBar({href:'home',label:'← '+T('home')},'fbprog-lab-'+sl.id)
         +'<div class="focusbody">'+secbob(m.key)
-        +'<div class="smodkick">Módulo '+m.n+' · '+m.name+'</div><p class="smoddesc">'+m.desc+'</p>'
+        +'<div class="smodkick">'+T('module')+' '+m.n+' · '+m.name+'</div><p class="smoddesc">'+modText(m).desc+'</p>'
         +labContent(sl)+'</div>'
-        +navRow({href:'home',k:'Volver',t:'Todos los módulos'}, nextm?{href:nextm.key,k:'Módulo '+nextm.n,t:nextm.name}:{href:'conceptos',k:'Referencia',t:'Conceptos'});
+        +navRow({href:'home',k:T('back'),t:T('allMods')}, nextNav);
     }
     var labs=m.labs.map(function(id){var l=LABMAP[id];
-      return card({href:'lab-'+id,chip:id,chipcls:l.star?'g-star':'g-blue',title:l.title,sub:l.t+' · '+dLabel[l.d]+(l.star?' · ⭐ Imprescindible':''),ring:'ring-lab-'+id});
+      return card({href:'lab-'+id,chip:id,chipcls:l.star?'g-star':'g-blue',title:l.title,sub:l.t+' · '+T('d_'+l.d)+(l.star?' · '+T('star'):''),ring:'ring-lab-'+id});
     }).join('');
-    return '<div class="focusbar"><a class="back" href="#home">← Inicio</a><div class="fb-prog" id="fbprog-'+m.key+'"></div></div>'
-      +'<div class="focusbody modhead">'+secbob(m.key)+'<div class="modkick">Módulo '+m.n+'</div><h2 class="modname">'+m.name+'</h2>'
-      +'<p class="moddesc">'+m.desc+'</p><div class="cards vert">'+labs+'</div></div>'
-      +navRow({href:'home',k:'Volver',t:'Todos los módulos'}, nextm?{href:nextm.key,k:'Módulo '+nextm.n,t:nextm.name}:{href:'conceptos',k:'Referencia',t:'Conceptos'});
+    return focusBar({href:'home',label:'← '+T('home')},'fbprog-'+m.key)
+      +'<div class="focusbody modhead">'+secbob(m.key)+'<div class="modkick">'+T('module')+' '+m.n+'</div><h2 class="modname">'+m.name+'</h2>'
+      +'<p class="moddesc">'+modText(m).desc+'</p><div class="cards vert">'+labs+'</div></div>'
+      +navRow({href:'home',k:T('back'),t:T('allMods')}, nextNav);
   }
   function labView(l){
     var m=modOfLab[l.id], i=LABORDER.indexOf(l.id);
     var pid=LABORDER[i-1], nid=LABORDER[i+1];
-    var prev=pid?{href:hrefForLab(pid),k:'Anterior',t:LABMAP[pid].title}:{href:m.key,k:'Volver',t:m.name};
-    var next=nid?{href:hrefForLab(nid),k:'Siguiente',t:LABMAP[nid].title}:{href:'home',k:'Fin',t:'Volver al inicio'};
-    return '<div class="focusbar"><a class="back" href="#'+m.key+'">← '+m.name+'</a><div class="fb-prog" id="fbprog-lab-'+l.id+'"></div></div>'
+    var prev=pid?{href:hrefForLab(pid),k:T('prev'),t:LABMAP[pid].title}:{href:m.key,k:T('back'),t:m.name};
+    var next=nid?{href:hrefForLab(nid),k:T('next'),t:LABMAP[nid].title}:{href:'home',k:T('end'),t:T('backHome')};
+    return focusBar({href:m.key,label:'← '+m.name},'fbprog-lab-'+l.id)
       +'<div class="focusbody">'+secbob('lab-'+l.id)+labContent(l)+'</div>'+navRow(prev,next);
   }
   function sec(key,inner){return '<section class="view focus" id="view-'+key+'">'+inner+'</section>';}
   function buildViews(){
     var h='';
-    h+=sec('setup',staticView('setup',STATIC.setup));
-    h+=sec('inputs',staticView('inputs',STATIC.inputs));
+    h+=sec('setup',staticView('setup',S('setup')));
+    h+=sec('inputs',staticView('inputs',S('inputs')));
     MODULES.forEach(function(m){h+=sec(m.key,modulePage(m));});
-    LABS.forEach(function(l){if(modOfLab[l.id].labs.length>1)h+=sec('lab-'+l.id,labView(l));});
-    h+=sec('conceptos',staticView('conceptos',STATIC.conceptos));
+    LABS.forEach(function(l){if(modOfLab[l.id].labs.length>1)h+=sec('lab-'+l.id,labView(LABMAP[l.id]));});
+    h+=sec('conceptos',staticView('conceptos',S('conceptos')));
     document.getElementById('views').innerHTML=h;
   }
 
   // ---------- home ----------
   function buildHome(){
     var start=[
-      card({href:'setup',icon:'num0',chip:'0',chipcls:'g-slate',title:'Antes de empezar',sub:'Cuenta, requisitos y arrancar la app'}),
-      card({href:'inputs',icon:'numpuntossuspensivos',chip:'⌘',chipcls:'g-slate',title:'Cómo interactuar con Bob',sub:'Atajos y formas de interactuar'})
+      card({href:'setup',icon:'num0',chip:'0',chipcls:'g-slate',title:T('startT'),sub:T('startS')}),
+      card({href:'inputs',icon:'numpuntossuspensivos',chip:'⌘',chipcls:'g-slate',title:T('inputsT'),sub:T('inputsS')})
     ].join('');
     var mods=MODULES.map(function(m){
-      return card({href:m.key,icon:'num'+m.n,chip:m.n,chipcls:'g-blue',cls:'mod',kick:'Módulo '+m.n,title:m.name,sub:m.tag+' · '+m.labs.length+' lab'+(m.labs.length>1?'s':''),ring:'ring-'+m.key});
+      return card({href:m.key,icon:'num'+m.n,chip:m.n,chipcls:'g-blue',cls:'mod',kick:T('module')+' '+m.n,title:m.name,sub:modText(m).tag+' · '+m.labs.length+' lab'+(m.labs.length>1?'s':''),ring:'ring-'+m.key});
     }).join('');
-    var ref=card({href:'conceptos',icon:'numbombilla',chip:'i',chipcls:'g-slate',title:'Conceptos',sub:'Ideas clave para tener a mano'});
+    var ref=card({href:'conceptos',icon:'numbombilla',chip:'i',chipcls:'g-slate',title:T('concepts'),sub:T('conceptsS')});
     document.getElementById('home').innerHTML=
-      '<div class="hero"><img class="heroimg" src="images/bob_wave.png" alt="Bob"><div class="kicker">IBM Bob · Level 3</div>'
-      +'<h1>Guía práctica de labs</h1>'
-      +'<p class="lead">Cuatro módulos, siete labs sobre la app <b>Galaxium Travels</b>. Elige por dónde empezar; tu progreso se guarda solo.</p>'
-      +'<button class="firma" id="firma" type="button" title="Autores" aria-label="Autores"><span class="avatares"><img src="images/mario.png" alt=""><img src="images/nibrass.png" alt=""><img src="images/miguel.jpg" alt=""></span><span>por <b>Mario Lozano</b>, <b>Nibrass Haider</b> y <b>Miguel Hidalgo</b></span></button>'
+      '<div class="hero">'+langSwitch('hero-lang')+'<img class="heroimg" src="images/bob_wave.png" alt="Bob"><div class="kicker">IBM Bob · Level 3</div>'
+      +'<h1>'+T('h1')+'</h1>'
+      +'<p class="lead">'+T('lead')+'</p>'
+      +'<button class="firma" id="firma" type="button" title="'+T('authors')+'" aria-label="'+T('authors')+'"><span class="avatares"><img src="images/mario.png" alt=""><img src="images/nibrass.png" alt=""><img src="images/miguel.jpg" alt=""></span><span>'+T('by')+' <b>Mario Lozano</b>, <b>Nibrass Haider</b> '+T('and')+' <b>Miguel Hidalgo</b></span></button>'
       +'<div class="ovprog"><div class="ovbar"><i id="ovfill"></i></div><span id="ovtxt"></span></div></div>'
-      +'<div class="group">Empieza aquí</div><div class="cards">'+start+'</div>'
-      +'<div class="group">Los módulos</div><div class="cards">'+mods+'</div>'
-      +'<div class="group">Referencia</div><div class="cards">'+ref+'</div>';
+      +'<div class="group">'+T('grpStart')+'</div><div class="cards">'+start+'</div>'
+      +'<div class="group">'+T('grpMods')+'</div><div class="cards">'+mods+'</div>'
+      +'<div class="group">'+T('grpRef')+'</div><div class="cards">'+ref+'</div>';
   }
 
   // ---------- progress ----------
@@ -554,17 +618,17 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
   function setRing(id,d,t){var r=document.getElementById(id);if(!r)return;var pct=t?Math.round(d/t*100):0;r.style.setProperty('--p',pct);r.setAttribute('data-lbl',d+'/'+t);r.className='ring'+(t&&d===t?' full':'');}
   function updateProgress(){
     var td=0,ta=0;
-    LABS.forEach(function(l){var p=labProg(l.id);td+=p.done;ta+=p.total;setRing('ring-lab-'+l.id,p.done,p.total);var fb=document.getElementById('fbprog-lab-'+l.id);if(fb)fb.textContent=p.done+' / '+p.total+' pasos';});
-    MODULES.forEach(function(m){var d=0,t=0;m.labs.forEach(function(id){var p=labProg(id);d+=p.done;t+=p.total;});setRing('ring-'+m.key,d,t);var fb=document.getElementById('fbprog-'+m.key);if(fb)fb.textContent=d+' / '+t+' pasos';});
-    var f=document.getElementById('ovfill'),o=document.getElementById('ovtxt');var pc=ta?Math.round(td/ta*100):0;if(f)f.style.width=pc+'%';if(o)o.textContent=td+' de '+ta+' pasos ('+pc+'%)';
+    LABS.forEach(function(l){var p=labProg(l.id);td+=p.done;ta+=p.total;setRing('ring-lab-'+l.id,p.done,p.total);var fb=document.getElementById('fbprog-lab-'+l.id);if(fb)fb.textContent=p.done+' / '+p.total+' '+T('stepsU');});
+    MODULES.forEach(function(m){var d=0,t=0;m.labs.forEach(function(id){var p=labProg(id);d+=p.done;t+=p.total;});setRing('ring-'+m.key,d,t);var fb=document.getElementById('fbprog-'+m.key);if(fb)fb.textContent=d+' / '+t+' '+T('stepsU');});
+    var f=document.getElementById('ovfill'),o=document.getElementById('ovtxt');var pc=ta?Math.round(td/ta*100):0;if(f)f.style.width=pc+'%';if(o)o.textContent=td+' '+T('of')+' '+ta+' '+T('stepsU')+' ('+pc+'%)';
   }
 
   // ---------- router ----------
   function titleOf(key){
     if(key==='home')return '';
-    if(key==='setup')return 'Antes de empezar';
-    if(key==='inputs')return 'Cómo interactuar con Bob';
-    if(key==='conceptos')return 'Conceptos';
+    if(key==='setup')return T('startT');
+    if(key==='inputs')return T('inputsT');
+    if(key==='conceptos')return T('concepts');
     if(key.indexOf('m-')===0){var m=MODULES.filter(function(x){return x.key===key;})[0];return m?m.name:'';}
     if(key.indexOf('lab-')===0){var l=LABMAP[key.slice(4)];return l?l.title:'';}
     return '';
@@ -575,7 +639,7 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
     var el=key==='home'?document.getElementById('home'):document.getElementById('view-'+key);
     (el||document.getElementById('home')).classList.add('active');
     window.scrollTo(0,0);
-    document.title=(key==='home'?'':titleOf(key)+' · ')+'IBM Bob · Level 3 — Guía de labs';
+    document.title=(key==='home'?'':titleOf(key)+' · ')+T('title');
     updateProgress();
   }
   function hkey(){return (location.hash||'').replace(/^#/,'')||'home';}
@@ -583,9 +647,14 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
 
   // ---------- events ----------
   document.addEventListener('click',function(e){
+    var lb=e.target.closest&&e.target.closest('[data-lang]');
+    if(lb){setLang(lb.getAttribute('data-lang'));return;}
     if(e.target.classList&&e.target.classList.contains('cp')){
-      var txt=e.target.parentNode.innerText.replace(/^Copiar\n?/,'');
-      if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){e.target.textContent='¡Copiado!';setTimeout(function(){e.target.textContent='Copiar';},1200);}).catch(function(){});
+      var btn=e.target, node=btn.parentNode.cloneNode(true), cb=node.querySelector('.cp');
+      if(cb)cb.remove();
+      var txt=node.textContent;
+      if(!btn.getAttribute('data-orig'))btn.setAttribute('data-orig',btn.textContent);
+      if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){btn.textContent=T('copied');setTimeout(function(){btn.textContent=btn.getAttribute('data-orig');},1200);}).catch(function(){});
     }
     if(e.target.classList&&e.target.classList.contains('tabbtn')){
       var wrap=e.target.closest('.tabs');if(!wrap)return;var idx=e.target.getAttribute('data-tab');
@@ -620,18 +689,33 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
   });
 
   // ---------- init ----------
-  buildHome();
-  buildViews();
-  [].slice.call(document.querySelectorAll('.chk')).forEach(function(b){
-    if(load('bobl3_'+b.id)==='1'){b.checked=true;var li=document.getElementById('li_'+b.id);if(li)li.classList.add('done');}
-  });
-  onHash();
-  updateProgress();
-  // firma: abre la ficha del autor; clic fuera o Escape la cierra
-  (function(){
+  function applyChrome(){
+    document.documentElement.lang=lang;
+    var set=function(id,t){var el=document.getElementById(id);if(el)el.textContent=t;};
+    set('acerca-titulo',T('title'));set('acerca-sub',T('authorsSub'));set('acerca-cerrar',T('close'));set('acerca-pie',T('authorsFoot'));
+  }
+  function render(){
+    buildHome();
+    buildViews();
+    [].slice.call(document.querySelectorAll('.chk')).forEach(function(b){
+      if(load('bobl3_'+b.id)==='1'){b.checked=true;var li=document.getElementById('li_'+b.id);if(li)li.classList.add('done');}
+    });
+    applyChrome();
+    onHash();
+    updateProgress();
     var f=document.getElementById('firma'), a=document.getElementById('acerca');
-    if(!f||!a)return;
-    f.onclick=function(){a.showModal();};
+    if(f&&a)f.onclick=function(){a.showModal();};
+  }
+  function setLang(l){
+    if(l===lang||(l==='ca'&&!CA))return;
+    lang=l;store('bobl3_lang',l);refreshLabs();
+    var y=window.pageYOffset;render();window.scrollTo(0,y);
+  }
+  render();
+  // ficha de autores: clic fuera o Escape la cierra
+  (function(){
+    var a=document.getElementById('acerca');
+    if(!a)return;
     document.getElementById('acerca-cerrar').onclick=function(){a.close();};
     a.addEventListener('click',function(e){if(e.target===a)a.close();});
   })();
