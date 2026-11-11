@@ -198,6 +198,8 @@ table{border-collapse:collapse}
   background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px;
   color:var(--muted);font:inherit;font-size:13px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .firma img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--line2);flex:none}
+.firma img+img{margin-left:-12px}
+.firma .avatares{display:inline-flex;align-items:center}
 .firma:hover{background:var(--panel2);color:var(--ink);border-color:var(--line2)}
 .firma:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .firma b{color:#f2f6fc;font-weight:600}
@@ -213,6 +215,7 @@ dialog.acerca::backdrop{background:rgba(4,7,13,.66)}
 .acerca-cerrar:hover{background:var(--panel2);color:var(--ink)}
 .acerca-cuerpo{padding:18px 20px 20px}
 .autor{display:flex;gap:14px;align-items:center}
+.autor+.autor{margin-top:16px}
 .autor img{width:66px;height:66px;border-radius:50%;object-fit:cover;border:2px solid var(--line2);flex:none}
 .autor-nombre{font-size:15px;font-weight:600;color:#f2f6fc}
 .autor-rol{font-size:12.5px;color:var(--muted);margin:2px 0 3px}
@@ -227,11 +230,27 @@ dialog.acerca::backdrop{background:rgba(4,7,13,.66)}
   <div class="acerca-cab">
     <div>
       <h2 id="acerca-titulo">IBM Bob · Level 3 — Guía de labs</h2>
-      <p>Autor · Client Value Engineering, IBM España</p>
+      <p>Autores · IBM España</p>
     </div>
     <button class="acerca-cerrar" type="button" id="acerca-cerrar">Cerrar</button>
   </div>
   <div class="acerca-cuerpo">
+    <div class="autor">
+      <img src="images/mario.png" alt="Mario Lozano Cortés">
+      <div>
+        <div class="autor-nombre">Mario Lozano Cortés</div>
+        <div class="autor-rol">Forward Deployed AI Engineer</div>
+        <div class="autor-email"><a href="mailto:mariolozano@ibm.com">mariolozano@ibm.com</a></div>
+      </div>
+    </div>
+    <div class="autor">
+      <img src="images/nibrass.png" alt="Nibrass Haider">
+      <div>
+        <div class="autor-nombre">Nibrass Haider</div>
+        <div class="autor-rol">Forward Deployed Engineer</div>
+        <div class="autor-email"><a href="mailto:nibrass.haider@ibm.com">nibrass.haider@ibm.com</a></div>
+      </div>
+    </div>
     <div class="autor">
       <img src="images/miguel.jpg" alt="Miguel Ángel Hidalgo Sánchez">
       <div>
@@ -523,7 +542,7 @@ const STATIC = {setup:"<div class=\"pre\">\n    <h2>0 · Antes de empezar (setup
       '<div class="hero"><img class="heroimg" src="images/bob_wave.png" alt="Bob"><div class="kicker">IBM Bob · Level 3</div>'
       +'<h1>Guía práctica de labs</h1>'
       +'<p class="lead">Cuatro módulos, siete labs sobre la app <b>Galaxium Travels</b>. Elige por dónde empezar; tu progreso se guarda solo.</p>'
-      +'<button class="firma" id="firma" type="button" title="Autor" aria-label="Autor"><img src="images/miguel.jpg" alt=""><span>por <b>Miguel Hidalgo</b></span></button>'
+      +'<button class="firma" id="firma" type="button" title="Autores" aria-label="Autores"><span class="avatares"><img src="images/mario.png" alt=""><img src="images/nibrass.png" alt=""><img src="images/miguel.jpg" alt=""></span><span>por <b>Mario Lozano</b>, <b>Nibrass Haider</b> y <b>Miguel Hidalgo</b></span></button>'
       +'<div class="ovprog"><div class="ovbar"><i id="ovfill"></i></div><span id="ovtxt"></span></div></div>'
       +'<div class="group">Empieza aquí</div><div class="cards">'+start+'</div>'
       +'<div class="group">Los módulos</div><div class="cards">'+mods+'</div>'
