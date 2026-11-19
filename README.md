@@ -94,9 +94,9 @@ No build is needed. In your repository go to **Settings → Pages → Source: De
 
 | | Name | Role |
 |---|---|---|
-| <img src="images/mario.png" width="48" alt="Mario Lozano Cortés"> | **Mario Lozano Cortés** | Forward Deployed AI Engineer |
-| <img src="images/nibrass.png" width="48" alt="Nibrass Haider"> | **Nibrass Haider** | Forward Deployed Engineer |
-| <img src="images/miguel.jpg" width="48" alt="Miguel Ángel Hidalgo Sánchez"> | **Miguel Ángel Hidalgo Sánchez** | Client Value Engineer |
+| <img src="images/mario.png" width="48" alt="Mario Lozano Cortés"> | **Mario Lozano Cortés** | Forward Deployed AI Engineer<br>Bobathon instructor |
+| <img src="images/nibrass.png" width="48" alt="Nibrass Haider"> | **Nibrass Haider** | Forward Deployed Engineer<br>Bobathon instructor |
+| <img src="images/miguel.jpg" width="48" alt="Miguel Ángel Hidalgo Sánchez"> | **Miguel Ángel Hidalgo Sánchez** | Client Value Engineer<br>Creator of the original material |
 
 ## 🙏 Acknowledgements
 
